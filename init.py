@@ -1,4 +1,5 @@
 import sys
+import shutil
 import os
 
 if __name__ == "__main__":
@@ -13,6 +14,7 @@ if __name__ == "__main__":
     os.mkdir(year)
 
     for i in range(25):
-        os.mkdir(f"{year}/day{i + 1}")
+        new_dir_path = f"{year}/day{i + 1}"
+        shutil.copytree("template", new_dir_path)
 
     print(f"Directory {year} created.")
