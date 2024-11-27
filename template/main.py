@@ -2,6 +2,11 @@ class DayX:
     def __init__(self, input_file):
         self.input_file = input_file
 
+        self.data = self.get_data(input_file)
+
+    def get_data(filename):
+        return [x.strip() for x in open(filename).readlines()]
+
     def part_one(self):
         """
         Does something
