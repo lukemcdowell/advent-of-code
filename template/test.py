@@ -1,22 +1,22 @@
 import unittest
-from main import DayX
+from main import Main
 
 
-class TestDay1(unittest.TestCase):
+class TestMain(unittest.TestCase):
 
     def test_part_one(self):
-        dayX = DayX("sample1.txt")
+        main = Main("sample1.txt")
 
-        expected_result = 123
-        result = dayX.part_one()
+        expected_result = None
+        result = main.part_one()
 
         self.assertEqual(result, expected_result)
 
     def test_part_two(self):
-        dayX = DayX("sample2.txt")
+        main = Main("sample2.txt")
 
-        expected_result = 123
-        result = dayX.part_two()
+        expected_result = None
+        result = main.part_two()
 
         self.assertEqual(result, expected_result)
 

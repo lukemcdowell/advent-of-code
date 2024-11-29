@@ -9,7 +9,7 @@ if __name__ == "__main__":
     year = sys.argv[1]
 
     if not year.isdigit() or not (2015 <= int(year) <= 2100):
-        sys.exit("Invalid year. Please provide a valid year.")
+        sys.exit("Invalid year.")
 
     os.mkdir(year)
 
