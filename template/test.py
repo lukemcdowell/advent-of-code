@@ -5,7 +5,7 @@ from main import Main
 class TestMain(unittest.TestCase):
 
     def test_part_one(self):
-        main = Main("sample1.txt")
+        main = Main("sample.txt")
 
         expected_result = None
         result = main.part_one()
@@ -13,7 +13,7 @@ class TestMain(unittest.TestCase):
         self.assertEqual(result, expected_result)
 
     def test_part_two(self):
-        main = Main("sample2.txt")
+        main = Main("sample.txt")
 
         expected_result = None
         result = main.part_two()

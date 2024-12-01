@@ -3,7 +3,8 @@ class Main:
         self.data = self.get_data(input_file)
 
     def get_data(self, filename):
-        return [x.strip() for x in open(filename).readlines()]
+        with open(filename, "r") as file:
+            return [x.strip() for x in file.readlines()]
 
     def part_one(self):
         for line in self.data:
