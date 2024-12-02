@@ -1,3 +1,3 @@
-My Advent of Code Solutions
+My Advent of Code solutions
 
 https://adventofcode.com/
