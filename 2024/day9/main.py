@@ -9,63 +9,91 @@ class Main:
     def part_one(self):
         total = 0
 
-        files, free_space = [], []
-        for i, f in enumerate(self.data):
-            if i % 2 == 0:  # file
-                files.append(int(f))
-            else:  # free space
-                free_space.append(int(f))
-
         disk = []
-        for i, file_size in enumerate(files):
-            disk += [i] * file_size
-
-        total_space = sum(files)
-
-        print(self.data)
-        print(files)
-        print("sum", sum(files))
-        print(disk)
-        print(total_space)
-
-        index = 0
         file_index = 0
         for i, size in enumerate(self.data):
-            if total_space == 0:
-                return total
-
-            # if file, fore size of block, add index * file index to total
-            if i % 2 == 0:
-                for j in range(int(size)):
-                    print(
-                        f"{index}. file. size: {size}, file index: {file_index}. total: {index * file_index}"
-                    )
-                    total += index * file_index
-                    index += 1
+            if i % 2 == 0:  # file
+                disk += [file_index] * int(size)
                 file_index += 1
-            # if empty, for the size of the block, add index * last file index to total
-            else:
-                for j in range(int(size)):
-                    if total_space == 0:
-                        return total
+            else:  # free space
+                disk += ["."] * int(size)
 
-                    last_file_index = disk.pop()
-                    print("pop:", last_file_index)
-                    print(disk)
-                    print(
-                        f"{index}. empty. size: {size}, last file index: {last_file_index}. total: {index * last_file_index}"
-                    )
-                    print("total space: ", total_space)
-                    total += index * last_file_index
-                    index += 1
-                    total_space -= 1
+        for i, b in enumerate(disk):
+            if b == ".":
+                last_file_index = None
+                while True:
+                    file = disk.pop()
+                    if file == ".":
+                        continue
+                    else:
+                        last_file_index = file
+                        break
+
+                total += i * last_file_index
+            else:
+                total += i * b
+        return total
 
     def part_two(self):
-        for line in self.data:
-            pass
+        total = 0
+
+        def find_empty(list, size):
+            c = 1
+            for i, x in enumerate(list):
+                if x == ".":
+                    c += 1
+                else:
+                    c = 0
+                if c == size:
+                    return i - size + 1
+
+        disk = []
+        files = []  # store sizes and index of disk
+        file_index, disk_index = 0, 0
+        for i, size in enumerate(self.data):
+            if i % 2 == 0:  # file
+                disk += [file_index] * int(size)
+                files.append((int(size), file_index, disk_index))
+                file_index += 1
+                disk_index += int(size)
+            else:  # free space
+                if int(size) == 0:
+                    continue
+                disk += ["."] * int(size)
+                disk_index += int(size)
+
+        print(disk)
+        print(find_empty(disk, 3))
+
+        files.reverse()
+        print(files)
+
+        # for each file, try and move left
+        for f in files:  # size, file index, disk index
+            left = disk[: f[2]]
+            print("file: ", f)
+            print("left: ", left)
+            print("e: ", find_empty(left, f[0]))
+
+            e = find_empty(left, f[0])
+
+            if e:
+                for i in range(f[0]):
+                    disk[e + i] = f[1]
+                    disk[f[2] + i] = "."
+
+        print(disk)
+
+        for i, b in enumerate(disk):
+            if b == ".":
+                continue
+            else:
+                total += i * b
+
+        return total
 
 
 if __name__ == "__main__":
-    day1 = Main("sample.txt")
+    day1 = Main("input.txt")
     print("Part One Total:", day1.part_one())
     print("Part Two Total:", day1.part_two())
