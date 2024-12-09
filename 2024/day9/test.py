@@ -15,7 +15,7 @@ class TestMain(unittest.TestCase):
     def test_part_two(self):
         main = Main("sample.txt")
 
-        expected_result = None
+        expected_result = 2858
         result = main.part_two()
 
         self.assertEqual(result, expected_result)

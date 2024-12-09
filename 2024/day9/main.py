@@ -62,18 +62,11 @@ class Main:
                 disk += ["."] * int(size)
                 disk_index += int(size)
 
-        print(disk)
-        print(find_empty(disk, 3))
-
         files.reverse()
-        print(files)
 
         # for each file, try and move left
         for f in files:  # size, file index, disk index
             left = disk[: f[2]]
-            print("file: ", f)
-            print("left: ", left)
-            print("e: ", find_empty(left, f[0]))
 
             e = find_empty(left, f[0])
 
@@ -81,8 +74,6 @@ class Main:
                 for i in range(f[0]):
                     disk[e + i] = f[1]
                     disk[f[2] + i] = "."
-
-        print(disk)
 
         for i, b in enumerate(disk):
             if b == ".":
