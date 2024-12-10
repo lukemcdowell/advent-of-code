@@ -16,6 +16,6 @@ class Main:
 
 
 if __name__ == "__main__":
-    day1 = Main("input.txt")
-    print("Part One Total:", day1.part_one())
-    print("Part Two Total:", day1.part_two())
+    main = Main("input.txt")
+    print("Part One Total:", main.part_one())
+    print("Part Two Total:", main.part_two())
